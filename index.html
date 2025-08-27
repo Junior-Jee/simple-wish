@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Miss You ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ff6b6b, #ffa500, #ff1493, #8a2be2, #00bfff);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease-in-out infinite;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Floating hearts background */
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(10deg); opacity: 0.7; }
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideIn 1.5s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(100px) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .main-heart {
+            font-size: 5rem;
+            color: #ff1493;
+            animation: heartbeat 2s ease-in-out infinite;
+            margin-bottom: 1rem;
+            display: inline-block;
+            filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.5));
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .typing-container {
+            margin-bottom: 2rem;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .typing-message {
+            font-size: 1.2rem;
+            color: white;
+            line-height: 1.6;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+            font-weight: 300;
+            opacity: 0;
+            border-right: 2px solid white;
+            animation: blink 1s infinite;
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-color: white; }
+            51%, 100% { border-color: transparent; }
+        }
+        
+        .message-complete {
+            border-right: none !important;
+            animation: none !important;
+            white-space: normal !important;
+        }
+        
+        .interactive-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff1493);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.4);
+            animation: fadeInUp 1s ease-out 1.5s both;
+            margin: 10px;
+        }
+        
+        .interactive-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.6);
+        }
+        
+        .hidden-message {
+            display: none;
+        }
+        
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 3s linear infinite;
+        }
+        
+        @keyframes sparkle {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+        
+        .footer-text {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            animation: fadeInUp 1s ease-out 2s both;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2.8rem;
+            }
+            
+            .main-heart {
+                font-size: 4rem;
+            }
+            
+            .message {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts background -->
+    <div class="heart" style="top: 10%; left: 10%; animation-delay: 0s;">💖</div>
+    <div class="heart" style="top: 20%; right: 15%; animation-delay: 1s;">💝</div>
+    <div class="heart" style="top: 60%; left: 20%; animation-delay: 2s;">💗</div>
+    <div class="heart" style="top: 70%; right: 10%; animation-delay: 3s;">💞</div>
+    <div class="heart" style="top: 40%; left: 5%; animation-delay: 4s;">💕</div>
+    <div class="heart" style="top: 30%; right: 25%; animation-delay: 5s;">💘</div>
+    
+    <div class="sparkles" id="sparkles"></div>
+    
+    <div class="container">
+        <div class="main-heart">💖</div>
+        <h1 class="main-title">I Miss You</h1>
+        
+        <div class="typing-container">
+            <div class="message typing-message" id="typingMessage"></div>
+        </div>
+        
+        <button class="interactive-btn" onclick="showNextMessage()" id="nextBtn" style="display: none;">💕 Next Message</button>
+        <button class="interactive-btn" onclick="createFireworks()" id="loveBtn" style="display: none;">✨ Send some love</button>
+        
+        <div class="footer-text">
+            Thinking of you always... 💭💕
+        </div>
+    </div>
+    
+    <script>
+        // Create continuous sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 3 + 's';
+            document.getElementById('sparkles').appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 3000);
+        }
+        
+        // Create sparkles continuously
+        setInterval(createSparkle, 300);
+        
+        // Messages to display one by one
+        const messages = [
+            "Every moment without you feels like forever...",
+            "You're always in my thoughts, and I can't wait to see you again.",
+            "You mean the world to me. 💖",
+            "Distance means nothing when someone means everything.",
+            "You're not just missed, you're treasured.",
+            "Until we meet again, carry my love with you wherever you go. 💝"
+        ];
+        
+        let currentMessage = 0;
+        let currentChar = 0;
+        let typingSpeed = 50;
+        let isTyping = false;
+        
+        // Start typing animation after page loads
+        setTimeout(() => {
+            typeMessage();
+        }, 2000);
+        
+        function typeMessage() {
+            if (currentMessage >= messages.length) {
+                document.getElementById('loveBtn').style.display = 'inline-block';
+                return;
+            }
+            
+            isTyping = true;
+            const messageElement = document.getElementById('typingMessage');
+            const fullMessage = messages[currentMessage];
+            
+            if (currentChar <= fullMessage.length) {
+                messageElement.textContent = fullMessage.substring(0, currentChar);
+                messageElement.style.opacity = 1;
+                currentChar++;
+                setTimeout(typeMessage, typingSpeed);
+            } else {
+                // Message complete
+                messageElement.classList.add('message-complete');
+                isTyping = false;
+                
+                // Show next button or love button
+                if (currentMessage < messages.length - 1) {
+                    setTimeout(() => {
+                        document.getElementById('nextBtn').style.display = 'inline-block';
+                        // Auto advance after 3 seconds
+                        setTimeout(() => {
+                            if (!isTyping) showNextMessage();
+                        }, 3000);
+                    }, 1000);
+                } else {
+                    setTimeout(() => {
+                        document.getElementById('loveBtn').style.display = 'inline-block';
+                    }, 1000);
+                }
+            }
+        }
+        
+        function showNextMessage() {
+            if (isTyping) return;
+            
+            currentMessage++;
+            currentChar = 0;
+            
+            const messageElement = document.getElementById('typingMessage');
+            messageElement.classList.remove('message-complete');
+            messageElement.style.opacity = 0;
+            
+            document.getElementById('nextBtn').style.display = 'none';
+            
+            // Add floating hearts for transition
+            createFloatingHeart();
+            
+            setTimeout(() => {
+                typeMessage();
+            }, 500);
+        }
+        
+        // Create floating hearts
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.style.position = 'fixed';
+            heart.style.fontSize = '2rem';
+            heart.style.color = '#ff1493';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '1000';
+            heart.innerHTML = ['💖', '💕', '💗', '💝', '💞'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = window.innerHeight + 'px';
+            
+            document.body.appendChild(heart);
+            
+            const animation = heart.animate([
+                { transform: 'translateY(0px) scale(1)', opacity: 1 },
+                { transform: `translateY(-${window.innerHeight + 200}px) scale(0.5)`, opacity: 0 }
+            ], {
+                duration: 3000,
+                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            });
+            
+            animation.onfinish = () => heart.remove();
+        }
+        
+        // Fireworks effect
+        function createFireworks() {
+            const colors = ['#ff6b6b', '#ffa500', '#ff1493', '#8a2be2', '#00bfff', '#32cd32'];
+            
+            for(let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.style.position = 'fixed';
+                    firework.style.width = '4px';
+                    firework.style.height = '4px';
+                    firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    firework.style.borderRadius = '50%';
+                    firework.style.pointerEvents = 'none';
+                    firework.style.zIndex = '1000';
+                    firework.style.left = '50%';
+                    firework.style.top = '50%';
+                    
+                    document.body.appendChild(firework);
+                    
+                    const angle = (Math.PI * 2 * i) / 20;
+                    const velocity = 100 + Math.random() * 100;
+                    const x = Math.cos(angle) * velocity;
+                    const y = Math.sin(angle) * velocity;
+                    
+                    const animation = firework.animate([
+                        { 
+                            transform: 'translate(-50%, -50%) scale(1)', 
+                            opacity: 1 
+                        },
+                        { 
+                            transform: `translate(${x - 50}%, ${y - 50}%) scale(0)`, 
+                            opacity: 0 
+                        }
+                    ], {
+                        duration: 1000 + Math.random() * 500,
+                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    });
+                    
+                    animation.onfinish = () => firework.remove();
+                }, i * 50);
+            }
+        }
+        
+        // Auto-create some initial floating hearts
+        setTimeout(() => {
+            for(let i = 0; i < 3; i++) {
+                setTimeout(() => createFloatingHeart(), i * 1000);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
