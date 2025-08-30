@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Miss You</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: linear-gradient(45deg, #0a0a2e, #16213e, #1a1a3a, #2d1b69, #0f3460);
+            background-size: 400% 400%;
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+            animation: backgroundShift 8s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            animation: starRotate 60s linear infinite;
+        }
+
+        @keyframes starRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .star {
+            position: absolute;
+            background: radial-gradient(circle, #fff, transparent);
+            border-radius: 50%;
+            animation: twinkle 2s infinite, starFloat 10s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes starFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .message-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            animation: containerFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes containerFloat {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
+            50% { transform: translate(-50%, -50%) translateY(-10px); }
+        }
+
+        .main-message {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff, #5f27cd);
+            background-size: 600% 600%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: 
+                fadeInMessage 2s ease-out 1s forwards,
+                gradientShift 3s ease-in-out infinite 1s,
+                messageGlow 2s ease-in-out infinite 1s,
+                messagePulse 4s ease-in-out infinite 3s;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(50px) scale(0.5) rotateX(90deg);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .main-message:hover {
+            transform: scale(1.1) rotateY(5deg);
+            filter: brightness(1.2);
+        }
+
+        @keyframes fadeInMessage {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px) scale(0.5) rotateX(90deg);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1) rotateX(0deg);
+            }
+        }
+
+        @keyframes messagePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .sub-message {
+            font-size: 1.5rem;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: 
+                fadeInSub 2s ease-out 2.5s forwards,
+                subMessageFloat 3s ease-in-out infinite 4s;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .sub-message:hover {
+            transform: scale(1.1);
+            color: #feca57;
+            text-shadow: 0 0 30px rgba(254, 202, 87, 0.8);
+        }
+
+        @keyframes fadeInSub {
+            from { opacity: 0; transform: translateY(30px) rotateX(45deg); }
+            to { opacity: 1; transform: translateY(0) rotateX(0deg); }
+        }
+
+        @keyframes subMessageFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes messageGlow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.7)) 
+                       drop-shadow(0 0 40px rgba(255, 107, 107, 0.3));
+            }
+            33% { 
+                filter: drop-shadow(0 0 30px rgba(72, 219, 251, 0.9)) 
+                       drop-shadow(0 0 50px rgba(72, 219, 251, 0.4));
+            }
+            66% { 
+                filter: drop-shadow(0 0 25px rgba(254, 202, 87, 0.8)) 
+                       drop-shadow(0 0 45px rgba(254, 202, 87, 0.3));
+            }
+        }
+
+        .firework {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .firework-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            transition: all 0.1s ease;
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: #ff6b6b;
+            animation: floatHeart 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 5;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.8));
+        }
+
+        @keyframes floatHeart {
+            0% { 
+                opacity: 0;
+                transform: translateY(100vh) scale(0.3) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) scale(0.8) rotate(20deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(50vh) scale(1.2) rotate(180deg);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) scale(0.9) rotate(340deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-10vh) scale(0.3) rotate(360deg);
+            }
+        }
+
+        .click-hint {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            animation: 
+                pulse 2s ease-in-out infinite,
+                hintFloat 3s ease-in-out infinite;
+            z-index: 10;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .click-hint:hover {
+            transform: translateX(-50%) scale(1.1);
+            color: #feca57;
+            border-color: rgba(254, 202, 87, 0.5);
+            background: rgba(254, 202, 87, 0.1);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes hintFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-8px); }
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: linear-gradient(90deg, #fff, transparent);
+            border-radius: 50%;
+            animation: shootingStar 3s linear infinite;
+        }
+
+        @keyframes shootingStar {
+            0% {
+                transform: translateX(-100px) translateY(-100px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100vw) translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            font-size: 1rem;
+            color: #feca57;
+            animation: sparkleFloat 4s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 8;
+        }
+
+        @keyframes sparkleFloat {
+            0% { 
+                opacity: 0;
+                transform: translateY(0px) scale(0) rotate(0deg);
+            }
+            25% {
+                opacity: 1;
+                transform: translateY(-30px) scale(1) rotate(90deg);
+            }
+            75% {
+                opacity: 1;
+                transform: translateY(-60px) scale(1.2) rotate(270deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0) rotate(360deg);
+            }
+        }
+
+        .love-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.3), rgba(255, 107, 107, 0.1));
+            border: 2px solid rgba(255, 107, 107, 0.6);
+            animation: bubbleFloat 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes bubbleFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0.5);
+            }
+            20% {
+                opacity: 0.8;
+                transform: translateY(80vh) scale(1);
+            }
+            80% {
+                opacity: 0.8;
+                transform: translateY(20vh) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20vh) scale(0.5);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-message {
+                font-size: 2.5rem;
+            }
+            .sub-message {
+                font-size: 1.2rem;
+            }
+            .click-hint {
+                font-size: 1rem;
+                bottom: 20px;
+                padding: 8px 16px;
+            }
+        }
+
+        /* Loading animation */
+        .loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            animation: fadeOutLoader 1s ease-out 1s forwards;
+        }
+
+        .loader-circle {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #feca57;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeOutLoader {
+            to { opacity: 0; pointer-events: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <div class="loader-circle"></div>
+    </div>
+    
+    <div class="stars"></div>
+    
+    <div class="message-container">
+        <div class="main-message">I MISS YOU</div>
+        <div class="sub-message">✨ You mean the world to me ✨</div>
+    </div>
+    
+    <div class="click-hint">Click anywhere for more fireworks! 🎆</div>
+
+    <script>
+        let animationFrameId;
+        let particleCount = 0;
+        const maxParticles = 200;
+
+        // Create animated stars
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                
+                const size = Math.random() * 4 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (1 + Math.random() * 2) + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Create shooting stars
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            star.style.left = Math.random() * 50 + '%';
+            star.style.top = Math.random() * 50 + '%';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            star.style.animationDuration = (2 + Math.random() * 2) + 's';
+            
+            document.body.appendChild(star);
+            
+            setTimeout(() => {
+                if (document.body.contains(star)) {
+                    document.body.removeChild(star);
+                }
+            }, 5000);
+        }
+
+        // Enhanced firework with trail effect
+        function createFirework(x, y) {
+            if (particleCount > maxParticles) return;
+            
+            const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43', '#6c5ce7', '#fd79a8'];
+            const particleNum = 35 + Math.random() * 15;
+            
+            // Create center burst
+            const centerBurst = document.createElement('div');
+            centerBurst.style.position = 'absolute';
+            centerBurst.style.left = x + 'px';
+            centerBurst.style.top = y + 'px';
+            centerBurst.style.width = '20px';
+            centerBurst.style.height = '20px';
+            centerBurst.style.borderRadius = '50%';
+            centerBurst.style.background = 'radial-gradient(circle, #fff, transparent)';
+            centerBurst.style.animation = 'centerBurstAnim 0.5s ease-out forwards';
+            document.body.appendChild(centerBurst);
+            
+            setTimeout(() => {
+                if (document.body.contains(centerBurst)) {
+                    document.body.removeChild(centerBurst);
+                }
+            }, 500);
+            
+            for (let i = 0; i < particleNum; i++) {
+                particleCount++;
+                const particle = document.createElement('div');
+                particle.className = 'firework-particle';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.backgroundColor = color;
+                particle.style.boxShadow = `0 0 15px ${color}, 0 0 30px ${color}`;
+                
+                const angle = (i * 360) / particleNum + Math.random() * 10;
+                const velocity = 120 + Math.random() * 80;
+                const lifetime = 1500 + Math.random() * 1000;
+                
+                const radians = (angle * Math.PI) / 180;
+                const vx = Math.cos(radians) * velocity;
+                const vy = Math.sin(radians) * velocity;
+                
+                document.body.appendChild(particle);
+                
+                let startTime = Date.now();
+                
+                function animate() {
+                    const elapsed = Date.now() - startTime;
+                    const progress = elapsed / lifetime;
+                    
+                    if (progress >= 1) {
+                        if (document.body.contains(particle)) {
+                            document.body.removeChild(particle);
+                        }
+                        particleCount--;
+                        return;
+                    }
+                    
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    const currentX = x + vx * easeOut;
+                    const currentY = y + vy * easeOut + 0.5 * 200 * progress * progress;
+                    
+                    particle.style.left = currentX + 'px';
+                    particle.style.top = currentY + 'px';
+                    particle.style.opacity = Math.max(0, 1 - progress);
+                    particle.style.transform = `scale(${1 - progress * 0.5}) rotate(${progress * 360}deg)`;
+                    
+                    requestAnimationFrame(animate);
+                }
+                
+                animate();
+            }
+        }
+
+        // Create sparkles
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = (x || Math.random() * window.innerWidth) + 'px';
+            sparkle.style.top = (y || Math.random() * window.innerHeight) + 'px';
+            sparkle.style.animationDelay = Math.random() * 2 + 's';
+            sparkle.style.animationDuration = (3 + Math.random() * 2) + 's';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                if (document.body.contains(sparkle)) {
+                    document.body.removeChild(sparkle);
+                }
+            }, 6000);
+        }
+
+        // Create love bubbles
+        function createLoveBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'love-bubble';
+            const size = 20 + Math.random() * 40;
+            bubble.style.width = size + 'px';
+            bubble.style.height = size + 'px';
+            bubble.style.left = Math.random() * 100 + '%';
+            bubble.style.animationDelay = Math.random() * 3 + 's';
+            bubble.style.animationDuration = (6 + Math.random() * 4) + 's';
+            document.body.appendChild(bubble);
+            
+            setTimeout(() => {
+                if (document.body.contains(bubble)) {
+                    document.body.removeChild(bubble);
+                }
+            }, 10000);
+        }
+
+        // Enhanced heart creation
+        function createHeart() {
+            const hearts = ['💖', '💕', '💓', '💗', '❤️', '💝'];
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.animationDuration = (5 + Math.random() * 3) + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                if (document.body.contains(heart)) {
+                    document.body.removeChild(heart);
+                }
+            }, 8000);
+        }
+
+        // Random fireworks with enhanced effects
+        function randomFirework() {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight * 0.7;
+            createFirework(x, y);
+            
+            // Add sparkles around firework
+            setTimeout(() => {
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        createSparkle(x + (Math.random() - 0.5) * 100, y + (Math.random() - 0.5) * 100);
+                    }, i * 200);
+                }
+            }, 300);
+        }
+
+        // Enhanced click interaction
+        document.addEventListener('click', (e) => {
+            createFirework(e.clientX, e.clientY);
+            
+            // Create multiple sparkles on click
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createSparkle(
+                        e.clientX + (Math.random() - 0.5) * 200,
+                        e.clientY + (Math.random() - 0.5) * 200
+                    );
+                }, i * 100);
+            }
+            
+            // Screen shake effect
+            document.body.style.animation = 'none';
+            document.body.offsetHeight; // Trigger reflow
+            document.body.style.animation = 'screenShake 0.5s ease-out';
+        });
+
+        // Screen shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes screenShake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-2px); }
+                75% { transform: translateX(2px); }
+            }
+            @keyframes centerBurstAnim {
+                0% { transform: scale(0); opacity: 1; }
+                100% { transform: scale(3); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Mouse movement effects
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.95) {
+                createSparkle(e.clientX, e.clientY);
+            }
+        });
+
+        // Initialize everything
+        window.addEventListener('load', () => {
+            createStars();
+            
+            // Start all animations with delays
+            setTimeout(() => {
+                setInterval(randomFirework, 1800);
+                setInterval(createHeart, 2500);
+                setInterval(createLoveBubble, 3000);
+                setInterval(createShootingStar, 4000);
+                setInterval(() => createSparkle(), 1000);
+            }, 2000);
+            
+            // Welcome fireworks sequence
+            setTimeout(() => {
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        randomFirework();
+                    }, i * 400);
+                }
+            }, 4000);
+            
+            // Initial hearts and bubbles
+            setTimeout(() => {
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        createHeart();
+                        createLoveBubble();
+                    }, i * 800);
+                }
+            }, 5000);
+        });
+
+        // Add touch support for mobile
+        document.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            createFirework(touch.clientX, touch.clientY);
+            
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    createSparkle(
+                        touch.clientX + (Math.random() - 0.5) * 150,
+                        touch.clientY + (Math.random() - 0.5) * 150
+                    );
+                }, i * 150);
+            }
+        });
+    </script>
+</body>
+</html>
